@@ -35,8 +35,8 @@ public class DossierController {
 
     @GetMapping
     public String showCompletedDossiers(Model model) {
-        model.addAttribute("contacts", dossierService.getAllCompletedDossiers());
-        return "redirect:/list-dossier.html";
+        model.addAttribute("dossiers", dossierService.getAllCompletedDossiers());
+        return "redirect:/completedDossiers.html";
     }
 
     @PostMapping("/delete")
@@ -44,10 +44,10 @@ public class DossierController {
         Optional<Dossier> dossier = Optional.ofNullable(dossierService.getDossierById(id_dossier));
         if (dossier.isPresent()) {
             dossierService.deleteDossierById(id_dossier);
-            redirectAttributes.addFlashAttribute("message", "Contact deleted successfully!");
+            redirectAttributes.addFlashAttribute("message", "Dossier deleted successfully!");
         } else {
-            redirectAttributes.addFlashAttribute("error", "Contact not found!");
+            redirectAttributes.addFlashAttribute("error", "Dossier not found!");
         }
-        return "redirect:/contacts";
+        return "redirect:/dossiers";
     }
 }
